@@ -818,6 +818,7 @@ MonoBehaviour:
   scrollrect: {fileID: 1177062228}
   textPrefab: {fileID: 8102735846437335460, guid: 4867ce7994d321047b54b19ab8386e4e, type: 3}
   buttonPrefab: {fileID: 11455116, guid: 37c108a6c38964f79a6621eccb33ddc1, type: 3}
+  buttonHolderPrefab: {fileID: 9126139850353976018, guid: bafec1b12170e7544a669845e5d8274c, type: 3}
   lineBreakPrefab: {fileID: 2871513492747710069, guid: ccfa3d11324426145972155ef6b25107, type: 3}
 --- !u!4 &2009679605
 Transform:

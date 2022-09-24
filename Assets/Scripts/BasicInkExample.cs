@@ -10,7 +10,7 @@ using TMPro;
 public class BasicInkExample : MonoBehaviour {
     public static event Action<Story> OnCreateStory;
 
-	private List<GameObject> buttons;
+	private GameObject buttons;
 
 	private int last_choices = 0;
 	
@@ -54,13 +54,13 @@ public class BasicInkExample : MonoBehaviour {
 		}
 
 		// Display all the choices, if there are any!
-		buttons = new List<GameObject>();
+		buttons = Instantiate(buttonHolderPrefab);
+		buttons.transform.SetParent(canvas.transform, false);
 		last_choices = story.currentChoices.Count;
 		if (story.currentChoices.Count > 0) {
 			for (int i = 0; i < story.currentChoices.Count; i++) {
 				Choice choice = story.currentChoices [i];
 				Button button = CreateChoiceView (choice.text.Trim ());
-				buttons.Add(button.gameObject);
 				// Tell the button what to do when we press it
 				button.onClick.AddListener (delegate {
 					OnClickChoiceButton (choice);
@@ -109,7 +109,7 @@ public class BasicInkExample : MonoBehaviour {
 	Button CreateChoiceView (string text) {
 		// Creates the button from a prefab
 		Button choice = Instantiate (buttonPrefab) as Button;
-		choice.transform.SetParent (canvas.transform, false);
+		choice.transform.SetParent (buttons.transform, false);
 		
 		// Gets the text from the button prefab
 		TextMeshProUGUI choiceText = choice.GetComponentInChildren<TextMeshProUGUI> ();
@@ -128,14 +128,15 @@ public class BasicInkExample : MonoBehaviour {
 		//for (int i = childCount - 1; i >= 0; --i) {
 			GameObject.Destroy (canvas.transform.GetChild (i).gameObject);
 		}*/
-		if (buttons != null)
+		/*if (buttons != null)
 		{
 			for (int i = 0; i < buttons.Count; i++)
 			{
 				//buttons[i].GetComponent<ButtonControl>().DisolveOut();
 				GameObject.Destroy(buttons[i]);
 			}
-		}
+		}*/
+		GameObject.Destroy(buttons);
 	}
 
 	[SerializeField]
@@ -152,6 +153,8 @@ public class BasicInkExample : MonoBehaviour {
 	private TextMeshProUGUI textPrefab = null;
 	[SerializeField]
 	private Button buttonPrefab = null;
+	[SerializeField]
+	private GameObject buttonHolderPrefab = null;
 	[SerializeField]
 	private GameObject lineBreakPrefab = null;
 }

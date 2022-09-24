@@ -18,6 +18,7 @@ public class TextMeshProDisolveIn : MonoBehaviour
 
     private TextMeshProUGUI text;
     private ParticleSystem.ShapeModule shape;
+    private ParticleSystem.EmissionModule emission;
     private float time = 0;
 
     private bool fadeout = false;
@@ -28,6 +29,7 @@ public class TextMeshProDisolveIn : MonoBehaviour
         text = GetComponent<TextMeshProUGUI>();
         particles = GetComponent<ParticleSystem>();
         shape = particles.shape;
+        emission = particles.emission;
         time = 0;
     }
 
@@ -36,17 +38,15 @@ public class TextMeshProDisolveIn : MonoBehaviour
     {
         if ((time <= dilate_time + fade_in_time || fadeout) && text != null && dilate_text != null && particles != null)
         {
-            if (fadeout)
+            if (fadeout && time >= dilate_time)
                 time -= Time.deltaTime;
             else
                 time += Time.deltaTime;
-            var emission = particles.emission;
             emission.rateOverTime = text.text.Length / 10;
             dilate_text.text = text.text;
-            dilate_text.fontMaterial.SetFloat(ShaderUtilities.ID_FaceDilate, Mathf.Lerp(-1, 0, dilate_curve.Evaluate(time / dilate_time)));
+            if (!fadeout)
+                dilate_text.fontMaterial.SetFloat(ShaderUtilities.ID_FaceDilate, Mathf.Lerp(-1, 0, dilate_curve.Evaluate(time / dilate_time)));
             text.color = new Color(text.color.r, text.color.g, text.color.b, Mathf.Lerp(0, 1, (time - dilate_time) / fade_in_time));
-            if (time < 0)
-                Destroy(this.gameObject);
         }
         shape.scale = text.textBounds.size;
         shape.position = new Vector3(GetComponent<RectTransform>().rect.xMin + (shape.scale.x / 2f), 0, -5);
@@ -55,5 +55,10 @@ public class TextMeshProDisolveIn : MonoBehaviour
     public void FadeOut()
     {
         fadeout = true;
+    }
+
+    public void FadeIn()
+    {
+        fadeout = false;
     }
 }

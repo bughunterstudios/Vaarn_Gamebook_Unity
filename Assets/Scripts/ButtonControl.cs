@@ -1,15 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ButtonControl : MonoBehaviour
+public class ButtonControl : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField]
     private float fade_time = 0;
 
     private float time;
+    [SerializeField]
     private Image button;
+    [SerializeField]
+    private Image button_layer;
     private TextMeshProDisolveIn text;
 
     private bool fadeout;
@@ -17,7 +21,6 @@ public class ButtonControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        button = GetComponent<Image>();
         text = GetComponentInChildren<TextMeshProDisolveIn>();
         time = 0;
         fadeout = false;
@@ -33,6 +36,7 @@ public class ButtonControl : MonoBehaviour
             else
                 time += Time.deltaTime;
             button.color = new Color(button.color.r, button.color.g, button.color.b, Mathf.Lerp(0, 1, time / fade_time));
+            button_layer.color = new Color(button_layer.color.r, button_layer.color.g, button_layer.color.b, Mathf.Lerp(0, 1, time / fade_time));
             if (time < 0)
                 Destroy(this.gameObject);
         }
@@ -42,5 +46,15 @@ public class ButtonControl : MonoBehaviour
     {
         fadeout = true;
         text.FadeOut();
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        text.FadeOut();
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        text.FadeIn();
     }
 }
