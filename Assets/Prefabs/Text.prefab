@@ -392,8 +392,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 2
-      minScalar: 0.5
+      scalar: 4
+      minScalar: 2
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -775,7 +775,7 @@ ParticleSystem:
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: -5}
     m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 280.32, y: 17.09, z: 1}
+    m_Scale: {x: 160, y: 17.09, z: 1}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -1091,20 +1091,20 @@ ParticleSystem:
         - serializedVersion: 3
           time: 0
           value: 1
-          inSlope: 0
-          outSlope: 0
+          inSlope: 0.66105646
+          outSlope: 0.66105646
           tangentMode: 0
           weightedMode: 0
           inWeight: 0
-          outWeight: 0
+          outWeight: 0.13769841
         - serializedVersion: 3
           time: 1
           value: 0
-          inSlope: -2
-          outSlope: -2
+          inSlope: -0.83581835
+          outSlope: -0.83581835
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0
+          inWeight: 0.12507504
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -1428,8 +1428,8 @@ ParticleSystem:
         ctime6: 0
         ctime7: 0
         atime0: 0
-        atime1: 16375
-        atime2: 49509
+        atime1: 3277
+        atime2: 39321
         atime3: 65535
         atime4: 0
         atime5: 0
@@ -5029,8 +5029,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 80, y: 0}
-  m_SizeDelta: {x: 160, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4416659666289830428
 CanvasRenderer:

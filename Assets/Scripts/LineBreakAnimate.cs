@@ -11,6 +11,8 @@ public class LineBreakAnimate : MonoBehaviour
     private Image image = null;
     [SerializeField]
     private List<Sprite> sprites = null;
+    [SerializeField]
+    private float speed = 1;
 
     private float time;
 
@@ -25,6 +27,6 @@ public class LineBreakAnimate : MonoBehaviour
     {
         time += Time.deltaTime;
         image.color = new Color(image.color.r, image.color.g, image.color.b, Mathf.Lerp(0, 1, time / fade_time));
-        image.sprite = sprites[(int)Mathf.Abs(GetComponent<RectTransform>().position.y + 1000) % sprites.Count];
+        image.sprite = sprites[(int)Mathf.Abs((GetComponent<RectTransform>().position.y * speed) + 1000) % sprites.Count];
     }
 }

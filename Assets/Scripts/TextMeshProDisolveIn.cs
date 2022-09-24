@@ -40,13 +40,16 @@ public class TextMeshProDisolveIn : MonoBehaviour
                 time -= Time.deltaTime;
             else
                 time += Time.deltaTime;
-            shape.scale = text.textBounds.size / 2;
+            var emission = particles.emission;
+            emission.rateOverTime = text.text.Length / 10;
             dilate_text.text = text.text;
             dilate_text.fontMaterial.SetFloat(ShaderUtilities.ID_FaceDilate, Mathf.Lerp(-1, 0, dilate_curve.Evaluate(time / dilate_time)));
             text.color = new Color(text.color.r, text.color.g, text.color.b, Mathf.Lerp(0, 1, (time - dilate_time) / fade_in_time));
             if (time < 0)
                 Destroy(this.gameObject);
         }
+        shape.scale = text.textBounds.size;
+        shape.position = new Vector3(GetComponent<RectTransform>().rect.xMin + (shape.scale.x / 2f), 0, -5);
     }
 
     public void FadeOut()
