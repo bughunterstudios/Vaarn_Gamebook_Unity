@@ -83,7 +83,8 @@ public class BasicInkExample : MonoBehaviour {
 
 	private IEnumerator ScrollToBottom()
 	{
-		yield return new WaitForEndOfFrame();
+		//yield return new WaitForEndOfFrame();
+		yield return new WaitForSeconds(0.1f);
 		Canvas.ForceUpdateCanvases();
 		scrollrect.verticalNormalizedPosition = 0f;
 		Canvas.ForceUpdateCanvases();

@@ -4924,6 +4924,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   fade_in_time: 1.5
+  select_time: 0
   dilate_text: {fileID: 4017092784656097963}
   particles: {fileID: 7037824979940717481}
 --- !u!199 &7287848080160941689
@@ -5184,10 +5185,29 @@ MonoBehaviour:
   dilate_time: 2
   dilate_curve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.1946464
+      outSlope: 0.1946464
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.22892249
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.31928337
+      outSlope: 0.31928337
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.22166353
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  fade_in_time: 0
+  fade_in_time: 1.5
+  select_time: 2
   dilate_text: {fileID: 0}
   particles: {fileID: 0}

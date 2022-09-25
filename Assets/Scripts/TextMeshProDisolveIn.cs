@@ -21,7 +21,7 @@ public class TextMeshProDisolveIn : MonoBehaviour
     private ParticleSystem.EmissionModule emission;
     private float time = 0;
 
-    private bool fadeout = false;
+    private bool select = false;
 
     // Start is called before the first frame update
     void Start()
@@ -36,29 +36,35 @@ public class TextMeshProDisolveIn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ((time <= dilate_time + fade_in_time || fadeout) && text != null && dilate_text != null && particles != null)
+        if (time <= dilate_time + fade_in_time && text != null && dilate_text != null && particles != null)
         {
-            if (fadeout && time >= dilate_time)
-                time -= Time.deltaTime;
-            else
-                time += Time.deltaTime;
+            time += Time.deltaTime;
             emission.rateOverTime = text.text.Length / 10;
             dilate_text.text = text.text;
-            if (!fadeout)
-                dilate_text.fontMaterial.SetFloat(ShaderUtilities.ID_FaceDilate, Mathf.Lerp(-1, 0, dilate_curve.Evaluate(time / dilate_time)));
+            dilate_text.fontMaterial.SetFloat(ShaderUtilities.ID_FaceDilate, Mathf.Lerp(-1, 0, dilate_curve.Evaluate(time / dilate_time)));
             text.color = new Color(text.color.r, text.color.g, text.color.b, Mathf.Lerp(0, 1, (time - dilate_time) / fade_in_time));
+        }
+        if (select)
+        {
+            dilate_text.fontMaterial.SetFloat(ShaderUtilities.ID_FaceDilate, 0.2f);
+            text.color = new Color(text.color.r, text.color.g, text.color.b, 0.5f);
         }
         shape.scale = text.textBounds.size;
         shape.position = new Vector3(GetComponent<RectTransform>().rect.xMin + (shape.scale.x / 2f), 0, -5);
     }
 
-    public void FadeOut()
+    public void Select()
     {
-        fadeout = true;
+        select = true;
     }
 
-    public void FadeIn()
+    public void Deselect()
     {
-        fadeout = false;
+        select = false;
+        if (time > dilate_time + fade_in_time)
+        {
+            dilate_text.fontMaterial.SetFloat(ShaderUtilities.ID_FaceDilate, 0f);
+            text.color = new Color(text.color.r, text.color.g, text.color.b, 1f);
+        }
     }
 }

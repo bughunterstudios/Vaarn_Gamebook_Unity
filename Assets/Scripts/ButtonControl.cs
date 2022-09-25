@@ -42,19 +42,13 @@ public class ButtonControl : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         }
     }
 
-    public void DisolveOut()
-    {
-        fadeout = true;
-        text.FadeOut();
-    }
-
     public void OnPointerEnter(PointerEventData eventData)
     {
-        text.FadeOut();
+        text.Select();
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        text.FadeIn();
+        text.Deselect();
     }
 }
